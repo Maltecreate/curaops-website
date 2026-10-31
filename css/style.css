@@ -132,3 +132,21 @@ footer a{color:#fff}
 .me img{width:200px;height:auto;align-self:center;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius);box-shadow:0 12px 30px rgba(0,0,0,.15)}
 .me-cap{font-size:.9rem;color:var(--muted);margin:0}
 @media (max-width:860px){.me{grid-template-columns:120px 1fr;gap:18px}.me img{width:120px}}
+
+/* Alles in CuraOps-Grün (31.10.) */
+:root{--ink:#fff;--muted:#cfdcd5;--line:rgba(255,255,255,.18)}
+body{background:var(--dark);color:#fff}
+p{color:#e3ebe6}
+.kicker{color:var(--lime)}
+.hero::after{display:none}
+main>section+section{border-top:1px solid rgba(255,255,255,.1)}
+.step,.contact-grid a,.tipp,.codebox{background:var(--dark-2);border-color:var(--line)}
+.tipp{background:var(--dark)}
+.step::before{background:var(--lime);color:var(--dark)}
+.prize{background:var(--dark-2);border:1px solid var(--line)}
+.prize .row{background:var(--dark)}
+.btn-dark{background:var(--lime);color:var(--dark)}
+.legal p,.legal li{color:#e3ebe6}
+.code-row input{color:var(--ink-dark,#16261f)}
+.code-out b{color:var(--lime)!important}
+button.btn-ghost{background:transparent;color:#fff;cursor:pointer}
