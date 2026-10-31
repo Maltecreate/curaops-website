@@ -97,8 +97,26 @@
       <span class="kicker">Tippgeber</span>
       <p class="quote">Du kennst gute Pflegekräfte, wir kennen gute Arbeitgeber.</p>
       <p style="font-weight:700;font-size:1.15rem">Bring sie mit uns zusammen.</p>
-      <p>Du kennst jemanden aus der Pflege, der sich etwas Neues wünscht? Schreib mir TIPP per WhatsApp an 0162 8916358. Ich melde mich persönlich bei dir und schicke dir deinen Tippgeber-Code, den du einfach weitergibst. Ich melde mich nur, wenn die Person selbst Kontakt aufnimmt.</p>
-      <div class="btns"><a class="btn btn-dark" href="https://wa.me/491628916358?text=TIPP">Schreib TIPP per WhatsApp</a></div>
+      <p>Du kennst jemanden aus der Pflege, der sich etwas Neues wünscht? Hol dir hier deinen persönlichen Tippgeber-Code und gib ihn weiter. Ich melde mich nur, wenn die Person selbst Kontakt aufnimmt.</p>
+
+      <div class="codebox" id="codebox">
+        <label for="tg-name"><b>1. Dein Vorname</b></label>
+        <div class="code-row">
+          <input id="tg-name" type="text" autocomplete="given-name" placeholder="z. B. Anna" maxlength="30">
+          <button class="btn btn-dark" id="tg-make" type="button">Code holen</button>
+        </div>
+        <div id="tg-result" hidden>
+          <p class="code-out">Dein Code: <b id="tg-code"></b></p>
+          <p><b>2. Code bei mir anmelden</b><br><small>Nur angemeldete Codes zählen für die Prämie.</small></p>
+          <a class="btn btn-dark" id="tg-register" href="#">Code per WhatsApp anmelden</a>
+          <p style="margin-top:20px"><b>3. Link an die Person weiterschicken</b><br><small>Wer über diesen Link schreibt, landet automatisch bei dir als Tippgeber:in.</small></p>
+          <div class="btns" style="margin-top:8px">
+            <a class="btn btn-lime" id="tg-share" href="#">Per WhatsApp weiterleiten</a>
+            <button class="btn btn-ghost" id="tg-copy" type="button">Link kopieren</button>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:16px"><small>Lieber persönlich? <a href="https://wa.me/491628916358?text=TIPP">Schreib mir einfach TIPP</a> an 0162 8916358.</small></p>
     </div>
     <div class="prize">
       <span class="kicker">Tippgeberprämie</span>
@@ -157,5 +175,33 @@
 
 <a class="btn btn-lime mobile-cta" href="https://wa.me/491628916358?text=CHECK">Schreib CHECK per WhatsApp</a>
 
+<script>
+(function(){
+  var NR='491628916358';
+  var name=document.getElementById('tg-name'),make=document.getElementById('tg-make'),res=document.getElementById('tg-result');
+  var codeEl=document.getElementById('tg-code'),reg=document.getElementById('tg-register'),share=document.getElementById('tg-share'),copy=document.getElementById('tg-copy');
+  function clean(v){
+    return v.trim().split(/\s+/)[0].toUpperCase().replace(/Ä/g,'AE').replace(/Ö/g,'OE').replace(/Ü/g,'UE').replace(/ß/g,'SS')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Z]/g,'').slice(0,10);
+  }
+  function go(){
+    var n=clean(name.value);
+    if(!n){name.focus();return;}
+    var code=n+(10+Math.floor(Math.random()*90));
+    var link='https://wa.me/'+NR+'?text='+encodeURIComponent('CHECK '+code);
+    codeEl.textContent=code;
+    reg.href='https://wa.me/'+NR+'?text='+encodeURIComponent('TIPP '+code+' – ich möchte Tippgeber:in werden. Mein Name: '+name.value.trim());
+    var msg='Moin! Ich kenne jemanden, der Pflegekräfte hier oben im Norden persönlich vermittelt – kostenlos für dich, mit Startprämie bis 1.000 €. Schreib einfach hier: '+link;
+    share.href='https://wa.me/?text='+encodeURIComponent(msg);
+    copy.onclick=function(){
+      var done=function(){copy.textContent='Kopiert ✓';setTimeout(function(){copy.textContent='Link kopieren';},2000);};
+      if(navigator.clipboard){navigator.clipboard.writeText(link).then(done,function(){prompt('Link kopieren:',link);});}else{prompt('Link kopieren:',link);}
+    };
+    res.hidden=false;
+  }
+  make.addEventListener('click',go);
+  name.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+})();
+</script>
 </body>
 </html>
