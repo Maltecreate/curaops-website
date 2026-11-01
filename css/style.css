@@ -150,3 +150,13 @@ main>section+section{border-top:1px solid rgba(255,255,255,.1)}
 .code-row input{color:var(--ink-dark,#16261f)}
 .code-out b{color:var(--lime)!important}
 button.btn-ghost{background:transparent;color:#fff;cursor:pointer}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:28px}
+.fact{background:var(--dark-2);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:8px}
+.fact b{font-size:clamp(1.5rem,3vw,2rem);color:var(--lime);line-height:1.1}
+.fact span{color:#e3ebe6}
+.fact small{color:var(--muted);font-size:.78rem;margin-top:auto;padding-top:6px}
+.ticks b{color:#fff}
+.facts{grid-template-columns:repeat(3,1fr)}
+@media (max-width:960px){.facts{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.facts{grid-template-columns:1fr}}
+@media (max-width:860px){#fakten .two{gap:0}}
